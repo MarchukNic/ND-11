@@ -1,1 +1,1 @@
-Hello world!
+6 x Hello world!
