@@ -7,16 +7,7 @@ function readAll(path){
             if (err) {
                 fail(err);
             } else {
-                // console.log(files[0]);
-                // let file2 = {};
-                // for (let i = 0; files.length - 1; ++i){
-                //     file2.name = files[i];
-                //     file2.content = files[i];
-                //     files[i] = file2;
-                // }
-                // console.log(file2);
                 done(filesContent(files,path));
-                // done(files);
             };
         });
     });
