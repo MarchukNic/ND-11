@@ -17,10 +17,8 @@ function readAll(path){
 const filesContent = (itemIds, path) => Promise.all(
     itemIds.map(
         name => {
-            console.log(path + name);
             return file.read(path + name)
                 .then(content => {
-                    console.log({ content, name });
                     return { content, name }
                 })
                 .catch(err => {
