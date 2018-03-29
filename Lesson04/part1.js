@@ -1,10 +1,12 @@
 const fs = require("fs");
 const crypto = require('crypto');
-const filename = 'c:\\curs\\data.txt';
+const path = require(`path`);
+const filenameIn = path.join(__dirname, 'data.txt');
+const filenameOut = path.join(__dirname, 'copy.txt');
 
 //Указан абсолютный путь, т.к. пути с пробелами (название директории с пробелами между словами) вызывают ошибку.
-const input = fs.createReadStream(filename);
-const output = fs.createWriteStream('c:\\curs\\copy.txt', { encoding: 'utf8' });
+const input = fs.createReadStream(filenameIn);
+const output = fs.createWriteStream(filenameOut, { encoding: 'utf8' });
 
 var hash = crypto.createHash('md5');
 
