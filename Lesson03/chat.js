@@ -34,7 +34,8 @@ let chatOnMessageReady = () => {
 };
 
 // Добавляем обработчик для webinarChat
-webinarChat.on('message', chatOnMessage, chatOnMessageReady);
+webinarChat.on('message', chatOnMessage);
+webinarChat.on('message', chatOnMessageReady);
 // Часть 1.1 Конец
 
 facebookChat.on('message', chatOnMessage);
@@ -57,6 +58,7 @@ setTimeout(() => {
   vkChat.close();
 
   vkChat.removeListener('message', chatOnMessage);
+  vkChat.removeListener('message', chatOnMessageReady);
 }, 10000);
 
 
@@ -69,5 +71,7 @@ setTimeout(() => {
 
 // Доп задавние 1
 setTimeout(() => {
-  webinarChat.removeListener('message', chatOnMessage, chatOnMessageReady);
+  console.log('End');
+  webinarChat.removeListener('message', chatOnMessage);
+  webinarChat.removeListener('message', chatOnMessageReady);
 }, 30000);
