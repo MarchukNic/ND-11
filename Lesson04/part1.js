@@ -4,7 +4,6 @@ const path = require(`path`);
 const filenameIn = path.join(__dirname, 'data.txt');
 const filenameOut = path.join(__dirname, 'copy.txt');
 
-//Указан абсолютный путь, т.к. пути с пробелами (название директории с пробелами между словами) вызывают ошибку.
 const input = fs.createReadStream(filenameIn);
 const output = fs.createWriteStream(filenameOut, { encoding: 'utf8' });
 
