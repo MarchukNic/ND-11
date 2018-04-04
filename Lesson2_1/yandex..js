@@ -2,7 +2,7 @@ const querystring = require('querystring');
 let data = querystring.stringify({
     'key': 'trnsl.1.1.20160723T183155Z.f2a3339517e26a3c.d86d2dc91f2e374351379bb3fe371985273278df',
     'lang': 'ru-en',
-    'text': '%D0%B2%D0%BC%D0%B0%D0%B2%D1%8B%D0%B0%D1%8B%D0%B2%D0%B0'
+    'text': 'попугай'
 });
 console.log(data);
 let options = {
