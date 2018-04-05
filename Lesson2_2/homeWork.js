@@ -90,8 +90,8 @@ var RPC = {
 
 //http://www.jsonrpc.org/specification#examples
 app.post("/rpc", function (req, res) {
-    console.log(req.body.method);
-    console.log(req.body.params);
+    // console.log(req.body.method);
+    // console.log(req.body.params);
     const method = RPC[req.body.method];
     // method(req.body.params, function (error, result) {
     if (method !== undefined) {
