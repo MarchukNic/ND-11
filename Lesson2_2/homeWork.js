@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const app = express()
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 let users = [
     {
@@ -85,17 +86,17 @@ app.put('/users/:id', (req, res) => {
 var RPC = {
     speak: function (callback) {
         callback(null, 'meow');
+    },
+    mul: function(params, callback){
+        callback(null, params[0] * params[1])
     }
 };
 
 //http://www.jsonrpc.org/specification#examples
 app.post("/rpc", function (req, res) {
-    // console.log(req.body.method);
-    // console.log(req.body.params);
     const method = RPC[req.body.method];
-    // method(req.body.params, function (error, result) {
     if (method !== undefined) {
-    method(function (error, result) {
+    method(req.body.params, function (error, result) {
         if (error) {
             res.status(400);
             res.write('Ошибка запроса!');
