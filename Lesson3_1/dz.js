@@ -30,15 +30,15 @@ mongoClient.connect(url, function (err, db) {
         //db.close();
     });
 
-    collection.find({ gender: 'м' }).toArray(function (err, result) {
-        if (err) {
-            console.log(err);
-        } else if (result.length) {
-            console.log('Найденный: ', result);
-        } else {
-            console.log('Нет документов с данными условиями поиска.')
-        }
-    });
+    // collection.find({ gender: 'м' }).toArray(function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else if (result.length) {
+    //         console.log('Найденный: ', result);
+    //     } else {
+    //         console.log('Нет документов с данными условиями поиска.')
+    //     }
+    // });
 
     //Выводить этот список;
     collection.find().toArray(function (err, result) {
