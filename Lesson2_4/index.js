@@ -10,13 +10,12 @@ io.on('connection', function (socket) {
     socket.on('chat message', function (msg) {
         io.emit('chat message', msg);
     });
-
+    // при первой загрузке пишется всем, кроме нового пользователя.
     socket.on('add user', function (msg) {
         socket.broadcast.emit('chat message', 'Подключился новый пользователь');
     });
 });
 
-// io.emit('some event', { for: 'everyone' });
 
 http.listen(3000, function () {
     console.log('listening on *:3000');
