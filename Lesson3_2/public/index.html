@@ -28,6 +28,7 @@
         <div class="panel-body">
             <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
             <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+            <a id="search" class="btn btn-sm btn-primary">Поиск</a>
         </div>
     </form>
     <table class="table table-condensed table-striped table-bordered">
@@ -71,7 +72,8 @@
                     var form = document.forms["userForm"];
                     form.elements["id"].value = user._id;
                     form.elements["name"].value = user.name;
-                    form.elements["age"].value = user.age;
+                    form.elements["phone"].value = user.phone;
+                    form.elements["lastname"].value = user.lastname;
                 }
             });
         }
@@ -131,6 +133,30 @@
                 }
             })
         }
+        // Получение всех пользователей
+        function GetUsersSearch(userLastName, userName, userPhone) {
+            $.ajax({
+                url: "/api/usersSearch",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    lastname: userLastName,
+                    name: userName,
+                    phone: userPhone
+                }),
+                success: function (users) {
+                    var rows = "";
+                    $("table tbody").remove();
+                    $("table").append("<tbody></tbody>");
+                    $.each(users, function (index, user) {
+                        // добавляем полученные элементы в таблицу
+                        rows += row(user);
+                    })
+                    $("table tbody").append(rows);
+                }
+            });
+        }
+
         // создание строки для таблицы
         var row = function (user) {
             return "<tr data-rowid='" + user._id + "'><td>" + user._id + "</td>" +
@@ -141,7 +167,6 @@
         }
         // сброс значений формы
         $("#reset").click(function (e) {
-
             e.preventDefault();
             reset();
         })
@@ -169,7 +194,14 @@
             var id = $(this).data("id");
             DeleteUser(id);
         })
-
+        // нажимаем на ссылку Поиск
+        $("#search").click(function (e) {
+            var form = document.forms["userForm"];
+            var lastname = form.elements["lastname"].value;
+            var name = form.elements["name"].value;
+            var phone = form.elements["phone"].value;
+            GetUsersSearch(lastname, name, phone);
+        })
         // загрузка пользователей
         GetUsers();
     </script>
