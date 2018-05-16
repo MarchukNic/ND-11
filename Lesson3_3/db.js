@@ -6,13 +6,13 @@ var userSchema = new mongoose.Schema({
     age: Number
 });
 
-userSchema.pre('save', function(next){
+userSchema.pre('save', function (next) {
     this.name = '121212';
     console.log('pre save');
     next();
 });
 
-userSchema.post('save', function(){
+userSchema.post('save', function () {
     console.log('post save');
 });
 
@@ -36,12 +36,60 @@ User.findById('kljjl', 'name age', function(err, obj){
 });
 */
 
-user = new User({name: 'Alex2'});
+user = new User({ name: 'Alex2' });
 user.save();
 
-User.findOne({name: "Alex2"}, function(err, user){
+User.findOne({ name: "Alex2" }, function (err, user) {
     user.name = 'Alex D.';
     user.save();
 });
 
-1:31:42
+blogShema.pre('save', function (next) {
+    this.date = '121212';
+    console.log('pre save')
+    //next();
+});
+
+blogShema.post('save', function () {
+    console.log('post save')
+});
+
+blogShema.virtual('fullname').get(function () {
+    return this.name + '--' + this.age;
+});
+
+var cat = new Cat({ name: 'alex', age: 30 });
+Cat.aggregate(
+    [{ '$match': ('name': 'alex')}], function(err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        console.log(doc);
+    }
+);
+/*
+console.log(doc);
+doc.name = 'Alex777';
+doc.save(function (err) {
+    console.log(doc);
+});
+))
+)
+*/
+Cat.findOne({name:'test'},'', function(err,doc){
+    if (err) {
+        console.log(err);
+    }
+    console.log(doc.fullname);
+})
+/*
+var kitty = new Cat({name: 'indiana'});
+
+kitty.save(function(err){
+    if (err){
+        console.log(err);
+    } else {
+        console.log('meov');
+    }
+});
+*/
