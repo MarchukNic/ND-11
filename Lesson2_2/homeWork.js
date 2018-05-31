@@ -84,11 +84,14 @@ app.put('/users/:id', (req, res) => {
 });
 
 var RPC = {
-    speak: function (callback) {
-        callback(null, 'meow');
+    // call {"jsonrpc": "2.0", "method": "userAll"}
+    userAll: function (params, callback) {
+        callback(null, users);
     },
-    mul: function(params, callback){
-        callback(null, params[0] * params[1])
+    // call {"jsonrpc": "2.0", "method": "user", "id": 0}
+    user: function(params, callback){
+        // console.log(params)
+        callback(null, users[params])
     }
 };
 
@@ -96,7 +99,7 @@ var RPC = {
 app.post("/rpc", function (req, res) {
     const method = RPC[req.body.method];
     if (method !== undefined) {
-    method(req.body.params, function (error, result) {
+    method(req.body.id, function (error, result) {
         if (error) {
             res.status(400);
             res.write('Ошибка запроса!');
