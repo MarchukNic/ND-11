@@ -26,7 +26,7 @@ var taskSchema = new Schema({
     name: String,
     description: String,
     status: Boolean,
-    user: ObjectId
+    user: Schema.Types.ObjectId,
 });
 
 var User = mongoose.model('users', userSchema);
@@ -77,7 +77,7 @@ app.get("/api/users", function (req, res) {
 
 // Задачи (название, описание, открыта/закрыта, пользователь) [список, добавление, редактирование, удаление];
 // Создание новой задачи
-// { "name": "Задача 1", "description": "Описание задачи номер 1", "status": 1 , "user": "5b347b3ce903b4379c5f4fae" }
+// { "name": "Задача 1", "description": "Описание задачи номер 1", "status": 1 , "user": "5b353d661a0edc11f0f515a5" }
 app.post("/api/tasks", jsonParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     task = new Task();
@@ -164,6 +164,9 @@ app.get("/api/aggregrate", function (req, res) {
                foreignField: "_id",  // field in the items collection
                as: "fromUsers"
             }
+         },
+         {
+            $unwind: "$fromUsers"
          },      
         {
             $match: {
@@ -172,7 +175,7 @@ app.get("/api/aggregrate", function (req, res) {
         },
         {
             $group: {
-                _id: '$users.name', 
+                _id: '$fromUsers.name', 
                 count: {$sum: 1}
             }
         },
@@ -195,7 +198,7 @@ app.get("/api/aggregrate", function (req, res) {
 //     from: "tasks",
 //     localField: "_id",
 //     foreignField: "user",
-//     as: "<output>"
+//     as: "tasks"
 // }
 
 app.listen(3000, function () {
