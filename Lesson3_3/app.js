@@ -187,6 +187,17 @@ app.get("/api/aggregrate", function (req, res) {
     });
 });
 
+
+
+// user 
+// // Equality Match
+// {
+//     from: "tasks",
+//     localField: "_id",
+//     foreignField: "user",
+//     as: "<output>"
+// }
+
 app.listen(3000, function () {
     console.log("Сервер ожидает подключения...");
 });
