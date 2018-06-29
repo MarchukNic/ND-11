@@ -175,7 +175,7 @@ app.get("/api/aggregrate", function (req, res) {
         },
         {
             $group: {
-                _id: '$fromUsers.name', 
+                _id: { id: '$user', name: '$fromUsers.name'  },
                 count: {$sum: 1}
             }
         },
