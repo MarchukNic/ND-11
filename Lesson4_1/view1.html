@@ -1,0 +1,38 @@
+Найти:
+<input ng-model="myQuery"><br><br>
+
+Сортировать по:
+<select ng-model="myOrderProperty">
+    <option value="id">ID</option>
+    <option value="weight">Весу</option>
+    <option value="height">Росту</option>
+    <!-- Добавить сортировку по имени. -->
+    <option value="name">Имени</option>
+    <!-- Добавить сортировку по весу в порядке убывания. -->
+    <option value="-weight">По убыванию веса</option>
+</select><br>
+
+<!-- Добавить дропдаун с фильтрацией по типу. -->
+Выбрать тип:
+<select ng-model="myOrderType">
+    <option ng-repeat="pokemon in pokemons" value="{{pokemon.type[0]}}">{{pokemon.type[0]}}</option>
+</select>
+
+<ul>
+    <li ng-repeat="pokemon in pokemons | filter: myQuery | filter: { type: myOrderType } | orderBy: myOrderProperty">
+        <!-- Вывести alert с именем покемона по клику на его картинку -->
+        <img ng-click="alerttext(pokemon.name)" src="{{pokemon.ThumbnailImage}}">
+
+        <small>ID #{{pokemon.id }}</small>
+        <!-- Вывести имя покемонов разными цветами: синим - если водный тип; красным - если огонь; зеленым - если трава (ng-class) -->
+        <h1 ng-class="pokemon.type[0]">{{pokemon.name}}</h1>
+        <p>Вес: {{pokemon.weight}}, рост: {{pokemon.height}}</p>
+        <p>Тип: {{pokemon.type [0]}}</p>
+        <hr />
+    </li>
+</ul>
+
+<p ng-show="myQuery">
+    Выведены покемоны, содержащие
+    {{myQuery}}
+</p>
