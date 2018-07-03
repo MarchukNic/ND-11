@@ -5,10 +5,27 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.view1',
   'myApp.view2',
-  'myApp.version'
+  'myApp.version',
+  'ui.router',
+  'ngMessages'
 ]).
-  config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+  config(['$locationProvider', '$routeProvider', '$stateProvider', function ($locationProvider, $routeProvider, $stateProvider) {
+    
+    var helloState = {
+      name: 'hello',
+      url: '/hello',
+      template: '<h3>hello world!</h3>'
+    }
+
+    var myaccount = {
+      name: 'myaccount',
+      url: '/myaccount',
+      templateUrl: '/myaccount.html'
+    }
     $locationProvider.hashPrefix('!');
+
+    $stateProvider.state(helloState);
+    $stateProvider.state(myaccount);
 
     $routeProvider.otherwise({ redirectTo: '/view1' });
 
@@ -28,4 +45,9 @@ angular.module('myApp')
     $scope.isActive = function (location) {
       return location === '#!' + $location.path()
     }
-  });
+  })
+  .controller('LoginpageCtrl', function() {
+    var vm = this;
+    vm.hello = "Hello from frontpage";
+    console.log('Sample');
+});

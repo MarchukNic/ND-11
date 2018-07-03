@@ -27,4 +27,10 @@
 /* Вынести главное меню в контроллер и сделать подсветку текущего пункта; */
 .active {
   background: blue;
+  color: red; 
+  font-weight: bolder; 
+}
+
+.errors {
+  color: maroon
 }

@@ -1,0 +1,47 @@
+<div class="container" ng-controller="LoginpageCtrl as vm">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="loginForm" novalidate>
+                        <!-- Вот так можем навешивать дополнительные визуальные классы в зависимости от состояния -->
+                        <div class="form-group" ng-class="{'has-error': loginForm.loginInput.$dirty && loginForm.loginInput.$invalid }">
+                            <label for="">Имя</label>
+                            <input type="text" class="form-control" name="loginInput" ng-model="vm.login" ng-required="true" ng-minlength="6">
+                        </div>
+                        <div ng-show="loginForm.loginInput.$dirty">
+                            <p ng-show="loginForm.loginInput.$error.required">Поле имя - обязательно</p>
+                            <p ng-show="loginForm.loginInput.$error.minlength">Длина имени - не менее 6 символов</p>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': loginForm.emailInput.$dirty && loginForm.emailInput.$invalid }">
+                            <label for="">Email</label>
+                            <input type="email" placeholder="Введите Ваш email" class="form-control" name="emailInput" ng-model="vm.email" ng-required="true">
+                            <!-- /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/       ng-pattern="'.{8,}' -->
+                        </div>
+                        <div ng-show="loginForm.emailInput.$dirty">
+                            <p ng-show="loginForm.emailInput.$error.required">Поле email - обязательно</p>
+                            <p ng-show="loginForm.emailInput.$error.email">Введен некоректный email</p>
+                            <!-- <p ng-show="loginForm.emailInput.$error.pattern">Длина email - не менее 8 символов</p> -->
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': loginForm.telefonInput.$dirty && loginForm.telefonInput.$invalid }">
+                            <label for="">Телефон</label>
+                            <input type="tel" placeholder="+79994567890"  pattern="\+7[0-9]{10}" class="form-control" name="telefonInput" ng-model="vm.telefon" ng-required="true" ng-minlength="10">
+                        </div>
+                        <div ng-messages="loginForm.telefonInput.$error" ng-show="loginForm.telefonInput.$dirty">
+                            <p ng-show="loginForm.telefonInput.$error.required">Поле телефона - обязательно</p>
+                            <p ng-show="loginForm.telefonInput.$error.pattern">Неверный формат записи</p>
+                        </div>
+                        <div>
+                            <!-- <pre>
+                                {{loginForm | json}}
+                            </pre> -->
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
