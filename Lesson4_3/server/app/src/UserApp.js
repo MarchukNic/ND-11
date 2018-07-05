@@ -17,6 +17,10 @@ angular.module('UserApp')
           templateUrl: 'src/CreateUser/CreateUser.html',
           controller: 'CreateUserCtrl'
         })
+        .when('/edit/:userId', {
+          templateUrl: 'src/EditUser/EditUser.html',
+          controller: 'EditUserCtrl'
+        })
         .when('/realtime/:userName', {
           templateUrl: 'src/PokemonRealtime/PokemonRealtime.html',
           controller: 'PokemonRealtimeCtrl'
