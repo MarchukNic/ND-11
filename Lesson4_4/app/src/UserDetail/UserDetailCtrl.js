@@ -3,22 +3,30 @@
 userApp.controller('UserDetailCtrl', function ($scope, $routeParams, UsersService) {
   $scope.userLoaded = false
 
-
-  UsersService.getUser($routeParams['userId']).then(function (response) {
-    $scope.user = response.data
+  $scope.user = UsersService.get({
+    userId: $routeParams['userId']
+  }, function (successResult) {
+    // Окей!
+    console.log(successResult)
+    $scope.notfoundError = false
+    $scope.userLoaded = true
+  }, function (errorResult) {
+    // Не окей..
+    $scope.notfoundError = true
     $scope.userLoaded = true
   })
 
+  $scope.user.$promise.then(function (result) {
+    // $scope.userLoaded = true
+  })
+
   $scope.deleteUser = function (userId) {
-    $scope.deletionError = false
-    $scope.deletionSuccess = false
-
-    UsersService.deleteUser(userId).then(function successCallback (response) {
-
+    $scope.user.$delete({
+      userId: userId
+    }, function (successResult) {
       // Окей!
       $scope.deletionSuccess = true
-    }, function errorCallback (response) {
-
+    }, function (errorResult) {
       // Не окей..
       $scope.deletionError = true
     })

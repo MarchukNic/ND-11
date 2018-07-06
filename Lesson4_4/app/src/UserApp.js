@@ -1,4 +1,4 @@
-var userApp = angular.module('UserApp', ['ngRoute', 'btford.socket-io'])
+var userApp = angular.module('UserApp', ['ngRoute', 'ngResource'])
 
 angular.module('UserApp')
 
@@ -13,26 +13,16 @@ angular.module('UserApp')
           templateUrl: 'src/UserDetail/UserDetail.html',
           controller: 'UserDetailCtrl'
         })
+        .when('/edit/:userId', {
+          templateUrl: 'src/EditUser/EditUser.html',
+          controller: 'EditUserCtrl'
+        })
         .when('/create', {
           templateUrl: 'src/CreateUser/CreateUser.html',
           controller: 'CreateUserCtrl'
-        })
-        .when('/realtime/:userName', {
-          templateUrl: 'src/PokemonRealtime/PokemonRealtime.html',
-          controller: 'PokemonRealtimeCtrl'
         })
         .otherwise({
           redirectTo: '/'
         })
     }
   ])
-
-  .factory('mySocket', function (socketFactory) {
-    var myIoSocket = io.connect('https://netology-socket-io.herokuapp.com/')
-
-    mySocket = socketFactory({
-      ioSocket: myIoSocket
-    })
-
-    return mySocket
-  })
