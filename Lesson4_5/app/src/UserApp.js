@@ -10,9 +10,12 @@ module('UserApp')
         when('/users', {
             template: '<user-list></user-list>'
         }).
+        // when('/users/:userId', {
+        //     templateUrl: 'src/UserDetail/UserDetail.html',
+        //     controller: 'UserDetailCtrl'
+        // }).
         when('/users/:userId', {
-            templateUrl: 'src/UserDetail/UserDetail.html',
-            controller: 'UserDetailCtrl'
+            template: '<user-detail></user-detail>'
         }).
         when('/edit/:userId', {
             templateUrl: 'src/EditUser/EditUser.html',

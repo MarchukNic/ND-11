@@ -6,12 +6,12 @@
 <div class="alert alert-danger" role="alert" ng-if="notfoundError">Пользователь не найден</div>
 
 <uib-tabset active="activeTab">
-
+<!-- <user-detail>  </user-detail> -->
     <uib-tab heading="Инфо" disable="disableControlTab">
 
-        <h1 class="media-heading">{{user.username | uppercase }}</h1>
+        <h1 class="media-heading"> {{$ctrl.users.name | uppercase }}</h1>
         <p>
-            {{user.name}}</p>
+            {{$ctrl.users.name}}</p>
 
     </uib-tab>
 
