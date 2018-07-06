@@ -26,11 +26,12 @@ angular
                     url: 'https://jsonplaceholder.typicode.com/users/' + userId
                 });
             },
-
-            editUser: function(userId) {
+            // Сделать интерфейс редактирования пользователя (на основе createUser) и сделать запрос PUT при клике на кнопку «Сохранить».
+            editUser: function(userData) {
                 return $http({
                     method: 'PUT',
-                    url: 'https://jsonplaceholder.typicode.com/user/' + userId
+                    url: 'https://jsonplaceholder.typicode.com/users/' + userData.id,
+                    data: userData
                 });
             }
 

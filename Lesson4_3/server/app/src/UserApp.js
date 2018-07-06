@@ -17,6 +17,7 @@ angular.module('UserApp')
           templateUrl: 'src/CreateUser/CreateUser.html',
           controller: 'CreateUserCtrl'
         })
+        // Сделать интерфейс редактирования пользователя (на основе createUser) и сделать запрос PUT при клике на кнопку «Сохранить».
         .when('/edit/:userId', {
           templateUrl: 'src/EditUser/EditUser.html',
           controller: 'EditUserCtrl'
