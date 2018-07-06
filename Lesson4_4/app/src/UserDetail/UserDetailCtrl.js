@@ -1,13 +1,13 @@
 'use strict'
 
-userApp.controller('UserDetailCtrl', function ($scope, $routeParams, UsersService) {
+userApp.controller('UserDetailCtrl', function ($scope, $routeParams, UsersService, UsersPostsService) {
   $scope.userLoaded = false
 
   $scope.user = UsersService.get({
     userId: $routeParams['userId']
   }, function (successResult) {
     // Окей!
-    console.log(successResult)
+    // console.log(successResult)
     $scope.notfoundError = false
     $scope.userLoaded = true
   }, function (errorResult) {
@@ -15,6 +15,21 @@ userApp.controller('UserDetailCtrl', function ($scope, $routeParams, UsersServic
     $scope.notfoundError = true
     $scope.userLoaded = true
   })
+
+  $scope.posts = UsersPostsService.query({
+    userId: $routeParams['userId']
+  }, function (successResult) {
+    // Окей!
+    // console.log(successResult)
+    $scope.notfoundError = false
+    $scope.userLoaded = true
+  }, function (errorResult) {
+    // Не окей..
+    // console.log(errorResult)
+    $scope.notfoundError = true
+    $scope.userLoaded = true
+  })
+
 
   $scope.user.$promise.then(function (result) {
     // $scope.userLoaded = true

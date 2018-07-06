@@ -12,6 +12,7 @@
         <p>
             {{user.name}}</p>
 
+
         <button class="btn btn-danger" ng-click="deleteUser(user.id)">
             <span class="glyphicon glyphicon-trash"></span>
             Удалить
@@ -19,7 +20,23 @@
         <a class="btn btn-primary" href="#!/edit/{{user.id}}">
             Редактировать
         </a>
+        <div class="list-group">
+            Список сообщений пользователя:
+            <div class="list-group-item" ng-repeat="singlePost in posts">
 
+                <p>
+                    <b>{{singlePost.title }}</b>
+                </p>
+
+
+                <p>
+                    {{singlePost.body }}
+                </p>
+
+                </a>
+            </div>
+
+        </div>
     </div>
 </div>
 
